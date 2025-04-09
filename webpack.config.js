@@ -7,28 +7,24 @@ const port = process.env.PORT || 3000;
 
 module.exports = {
   // remove devtool in production
-  devtool: "eval-cheap-module-source-map",
-  mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
+  mode: 'production',
   entry: './src/index.jsx',
   output: {
-    filename: './bundle.js'
+    filename: './bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js$|jsx/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
-        test:/\.css$/,
-        use:[
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader"
-        ]
-      }
-    ]
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+      },
+    ],
   },
   // TODO: remove performance false and fix warning
   // performance: {
@@ -37,11 +33,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
-      inject: 'body' 
+      inject: 'body',
     }),
     new MiniCssExtractPlugin({
-      filename:"styles.css",
-    })
+      filename: 'styles.css',
+    }),
   ],
   devServer: {
     static: {
@@ -52,5 +48,5 @@ module.exports = {
     // compress: true,
     open: true,
     liveReload: true,
-  }
+  },
 };
